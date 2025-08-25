@@ -1,25 +1,21 @@
-import {ProblemStateDto} from "../sender";
-import {Platform} from "../platform";
-import {StatusGroup} from "./explanation_status";
-
-const result_state = (classList) => {
-    if (ExplationStatus.isAc(classList)) {
+function result_state(classList) {
+    if (ExplanationStatus.isAc(classList)) {
         return ResultState.AC;
     }
     return ResultState.FAIL;
 }
 
-const get_problem_info = (dom) => {
+function get_problem_info(dom) {
 
-    const get_id = (dom)  =>{
+    const get_id = function (dom) {
         return dom.textContent.trim();
     }
 
-    const get_name = (dom) =>{
+    const get_name = function (dom) {
         return dom.getAttribute('data-original-title');
     }
 
-    const get_url = (dom) => {
+    const get_url = function (dom) {
         return dom.getAttribute('href');
     };
 
@@ -30,7 +26,7 @@ const get_problem_info = (dom) => {
     }
 }
 
-const create_dto = (classList) => {
+function create_dto(classList) {
     const status = result_state(classList);
     const dom = document.querySelector('.problem_title');
     const {id, name, url} = get_problem_info(dom);
@@ -38,7 +34,7 @@ const create_dto = (classList) => {
     return new ProblemStateDto(Platform.BOJ, status, id, name, url, currentDate)
 }
 
-export const process = (mutations) => {
+function process(mutations) {
     const classList = mutations[0].target.classList;
     if (!StatusGroup.isReady(classList)) {
         console.log(create_dto(classList));

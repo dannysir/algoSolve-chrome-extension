@@ -1,4 +1,4 @@
-export class ProblemStateDto {
+class ProblemStateDto {
     constructor(platform, result_state, problem_id, name, url, solved_date) {
         this.platform = platform;
         this.result_state = result_state;
@@ -9,7 +9,7 @@ export class ProblemStateDto {
     }
 }
 
-export const send = (dto) => {
+function send(dto) {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'http://localhost:8080/api/v1/problem');
     xhr.setRequestHeader('content-type', 'application/json');

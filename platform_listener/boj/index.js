@@ -1,5 +1,3 @@
-import {process} from "./process";
-
 const observer = new MutationObserver((mutations) => {
     process(mutations);
 })
